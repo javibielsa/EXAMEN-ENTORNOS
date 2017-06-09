@@ -1,13 +1,39 @@
 import java.awt.Button;
+import java.awt.Container;
 import java.awt.Point;
 
+import javax.swing.JFrame;
 import javax.xml.ws.FaultAction;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.MockitoJUnitRunner;
+
+@RunWith(MockitoJUnitRunner.class)
 
 public class AclassTest {
 	Aclass a = new Aclass();
+	Aclass object;
+	
+	@Mock
+	FaultAction faultAction;
+	@Mock
+	Button button; 
+	@Mock
+	Point point;
+	@Mock
+	Container container;
+	@Mock
+	JFrame frame;
+	
+	@Before
+	public void setUp(){
+		object = new Aclass();
+	}
 	
 	@Test
 	public void locateTest() throws RuntimeException{
@@ -66,8 +92,14 @@ public class AclassTest {
 	}*/
 	
 	@Test
-	public void mockito1Test(){
+	public void mockito1Test() throws Exception{
+		Mockito.when(button.getParent()).thenReturn(container);
+		Mockito.when(container.isEnabled()).thenReturn(true);
+		Mockito.when(container.contains(point)).thenReturn(true);
+		Mockito.when(faultAction.value()).thenReturn("salesianos.edu");
+		Mockito.when(faultAction.value().toUpperCase()).thenReturn("salesianos.edu");
 		
+		object.mockito1(faultAction, button, point);
 	}
 	
 	/*public void mockito1(FaultAction faultAction, Button button, Point point) {
@@ -81,5 +113,24 @@ public class AclassTest {
 
 		throw new RuntimeException();
 
+	}*/
+	
+	@Test
+	public void mockito2Test(){
+		Mockito.when(button.getActionCommand()).thenReturn("algo");
+		Mockito.when(frame.checkImage(null, null)).thenReturn(8);
+		Mockito.when(frame.isDisplayable()).thenReturn(true);
+		
+		object.mockito2(frame, button);
+	}
+	/*public void mockito2(JFrame frame, Button close) {
+
+		if (close.getActionCommand().equals("close") && frame.checkImage(null, null) > 2) {
+			if (frame.isDisplayable()) {
+				throw new RuntimeException();
+			}
+			return;
+		}
+		throw new RuntimeException();
 	}*/
 }
