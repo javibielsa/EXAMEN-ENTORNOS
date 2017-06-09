@@ -36,12 +36,12 @@ public class AclassTest {
 	}
 	
 	@Test
-	public void locateTest() throws RuntimeException{
+	public void locateTest(){
 		Assert.assertEquals(new Point(5,6),a.locate(5,6));
 		Assert.assertEquals(new Point(5,6),a.locate(-5,-6));
 		try{
 			Assert.assertNull(a.locate(0,0));
-			Assert.fail("No puedes meter numeros nulos");
+			Assert.fail("No da nada");
 		}catch(RuntimeException e){}
 		
 		
@@ -49,7 +49,8 @@ public class AclassTest {
 	
 	@Test
 	public void getAreaTest(){
-		
+		double expected=2;
+		double primero = Aclass.getArea(1, 1, 100);
 		
 	}
 	
@@ -73,10 +74,10 @@ public class AclassTest {
 			Assert.assertNull(a.concat(true, null, "pepito"));
 			Assert.fail("un string es nulo");
 		}catch(RuntimeException a){}
-		/*try{
+		try{
 			Assert.assertNull(a.concat(false, "hola", "pepito"));
 			Assert.fail("No puedes meter numeros nulos");
-		}catch(Exception e){}*/
+		}catch(Exception e){}
 	}
 	
 	/*public String concat(boolean append, String a, String b) {
@@ -97,7 +98,6 @@ public class AclassTest {
 		Mockito.when(container.isEnabled()).thenReturn(true);
 		Mockito.when(container.contains(point)).thenReturn(true);
 		Mockito.when(faultAction.value()).thenReturn("salesianos.edu");
-		Mockito.when(faultAction.value().toUpperCase()).thenReturn("salesianos.edu");
 		
 		object.mockito1(faultAction, button, point);
 	}
@@ -121,7 +121,9 @@ public class AclassTest {
 		Mockito.when(frame.checkImage(null, null)).thenReturn(8);
 		Mockito.when(frame.isDisplayable()).thenReturn(true);
 		
+		
 		object.mockito2(frame, button);
+		throw new RuntimeException();
 	}
 	/*public void mockito2(JFrame frame, Button close) {
 
